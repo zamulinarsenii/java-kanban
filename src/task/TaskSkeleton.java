@@ -1,3 +1,7 @@
+package task;
+
+import task.Status;
+
 public class TaskSkeleton {
     public String title;
     public Status status;

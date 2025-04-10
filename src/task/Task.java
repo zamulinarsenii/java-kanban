@@ -1,3 +1,7 @@
+package task;
+
+import task.Status;
+
 import java.util.ArrayList;
 
 public class Task extends TaskSkeleton {
