@@ -1,7 +1,15 @@
 package task;
 
 public class Subtask extends Task {
-    public int epicId;
+    private int epicId;
+
+    public int getEpicId() {
+        return epicId;
+    }
+
+    public void setEpicId(int epicId) {
+        this.epicId = epicId;
+    }
 
     public Subtask(String title, String description, int id, Status status, int epicId) {
         super(title, description, id, status);
@@ -12,7 +20,7 @@ public class Subtask extends Task {
     public String toString() {
         String text = title + " | Status: " + status + ", id: " + id + "\n";
         text += description + "\n";
-        text+= "Принадлежит эпику с id = "+epicId+ "\n";
+        text += "Принадлежит эпику с id = " + epicId + "\n";
         return text;
     }
 }

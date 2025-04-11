@@ -14,10 +14,8 @@ public class Main {
         getById(taskManager);
         updateTask(taskManager);
         printAllTasks(taskManager);
-
         deleteById(taskManager);
         printAllTasks(taskManager);
-
         deleteAllTasks(taskManager);
         printAllTasks(taskManager);
     }
@@ -26,25 +24,25 @@ public class Main {
         String title = "Задача 1";
         String description = "Описание задачи 1";
         Status status = Status.NEW;
-        Task task = new Task(title, description, taskManager.counter, status);// id = 0
+        Task task = new Task(title, description, taskManager.getCounter(), status);// id = 0
         taskManager.addTask(task);
 
         title = "Задача 2";
         description = "Описание задачи 2";
         status = Status.DONE;
-        task = new Task(title, description, taskManager.counter, status);// id = 1
+        task = new Task(title, description, taskManager.getCounter(), status);// id = 1
         taskManager.addTask(task);
     }
 
     public static void addEpic(TaskManager taskManager) {
         String title = "Эпик 1";
         String description = "Описание эпика 1";
-        Epic epic = new Epic(title, description, taskManager.counter);// id = 2
+        Epic epic = new Epic(title, description, taskManager.getCounter());// id = 2
         taskManager.addEpic(epic);
 
         title = "Эпик 2";
         description = "Описание эпика 2";
-        epic = new Epic(title, description, taskManager.counter);// id = 3
+        epic = new Epic(title, description, taskManager.getCounter());// id = 3
         taskManager.addEpic(epic);
     }
 
@@ -53,21 +51,21 @@ public class Main {
         String description = "Описание подзадачи 1";
         Status status = Status.NEW;
         int epicId = 2;
-        Subtask subtask = new Subtask(title, description, taskManager.counter, status, epicId);// id = 4
+        Subtask subtask = new Subtask(title, description, taskManager.getCounter(), status, epicId);// id = 4
         taskManager.addSubtask(subtask);
 
         title = "Подзадача 2";
         description = "Описание подзадачи 2";
         status = Status.DONE;
         epicId = 2;
-        subtask = new Subtask(title, description, taskManager.counter, status, epicId);// id = 5
+        subtask = new Subtask(title, description, taskManager.getCounter(), status, epicId);// id = 5
         taskManager.addSubtask(subtask);
 
         title = "Подзадача 3";
         description = "Описание подзадачи 3";
         status = Status.DONE;
         epicId = 3;
-        subtask = new Subtask(title, description, taskManager.counter, status, epicId);// id = 6
+        subtask = new Subtask(title, description, taskManager.getCounter(), status, epicId);// id = 6
         taskManager.addSubtask(subtask);
     }
 
