@@ -1,14 +1,18 @@
 package task;
 
-import task.Status;
+public class Subtask extends Task {
+    public int epicId;
 
-import java.util.ArrayList;
+    public Subtask(String title, String description, int id, Status status, int epicId) {
+        super(title, description, id, status);
+        this.epicId = epicId;
+    }
 
-public class Subtask extends TaskSkeleton {
-    public ArrayList<String> tasks;
-    public Subtask(String title, Status status, ArrayList<String> tasks) {
-        super(title,status);
-        this.tasks = tasks;
-        type = TypeOfTask.SUBTASK;
+    @Override
+    public String toString() {
+        String text = title + " | Status: " + status + ", id: " + id + "\n";
+        text += description + "\n";
+        text+= "Принадлежит эпику с id = "+epicId+ "\n";
+        return text;
     }
 }

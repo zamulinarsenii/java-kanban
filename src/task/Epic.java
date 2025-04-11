@@ -1,38 +1,17 @@
 package task;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class Epic extends TaskSkeleton {
-    public HashMap<Integer, Subtask> subtasks = new HashMap<>();
-
-    public Epic(String title, ArrayList<Subtask> subtasks) {
-        super(title);
-        int statusNewCounter = 0;
-        for (int id = 0; id < subtasks.size(); id++) {
-            this.subtasks.put(id, subtasks.get(id));
-            if (subtasks.get(id).status == Status.NEW) {
-                statusNewCounter++;
-            }
-        }
-        if (statusNewCounter == subtasks.size())
-            status = Status.NEW;
-        else if (statusNewCounter == 0)
-            status = Status.DONE;
-        else
-            status = Status.IN_PROGRESS;
-        type = TypeOfTask.EPIC;
+public class Epic extends Task{
+    public ArrayList<Integer> subtasksId = new ArrayList<>();
+    public Epic(String title, String description, int id) {
+        super(title, description, id);
     }
-
     @Override
     public String toString() {
-        String text = title;
-        for (int i = 0; i < subtasks.size(); i++) {
-            text += "\n - " + subtasks.get(i).title;
-            for (String task : subtasks.get(i).tasks) {
-                text += "\n  - " + task;
-            }
-        }
+        String text = title + " | Status: " + status + ", id: " + id + "\n";
+        text += description + "\n";
+        text+= "Содержит подзадачи с id = "+subtasksId+ "\n";
         return text;
     }
 }

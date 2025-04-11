@@ -3,26 +3,45 @@ package task;
 import task.Status;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class Task extends TaskSkeleton {
-    public ArrayList<String> tasks;
+public class Task {
+    public String title;
+    public String description;
+    public int id;
+    public Status status;
 
-    public Task(String title, ArrayList<String> tasks) {
-        super(title);
-        type = TypeOfTask.TASK;
-        this.tasks = tasks;
+    public Task(String title, String description, int id, Status status) {
+        this.title = title;
+        this.description = description;
+        this.id = id;
+        this.status = status;
     }
-    public Task(String title, Status status, ArrayList<String> tasks) {
-        super(title, status);
-        type = TypeOfTask.TASK;
-        this.tasks = tasks;
+
+    public Task(String title, String description, int id) {
+        this.title = title;
+        this.description = description;
+        this.id = id;
+        status = Status.NEW;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task task)) return false;
+        return id == task.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, id, status);
+    }
+
     @Override
     public String toString() {
-        String text = title;
-        for (String task : tasks) {
-            text += "\n - " + task;
-        }
+        String text = title + " | Status: " + status + ", id: " + id + "\n";
+        text += description + "\n";
+
         return text;
     }
 }
