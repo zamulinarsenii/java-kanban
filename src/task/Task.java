@@ -1,8 +1,5 @@
 package task;
 
-import task.Status;
-
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Task {
@@ -39,6 +36,10 @@ public class Task {
         this.description = description;
         this.id = id;
         status = Status.NEW;
+    }
+
+    public Task(Task task) {
+        this(task.title, task.description, task.id, task.status);
     }
 
     @Override

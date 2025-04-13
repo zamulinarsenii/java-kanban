@@ -16,7 +16,10 @@ public class Epic extends Task {
     public Epic(String title, String description, int id) {
         super(title, description, id);
     }
-
+    public Epic(Epic epic) {
+        super(epic);
+        this.subtasksId = new ArrayList<>(epic.subtasksId);
+    }
     @Override
     public String toString() {
         String text = title + " | Status: " + status + ", id: " + id + "\n";
