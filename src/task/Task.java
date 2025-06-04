@@ -31,6 +31,14 @@ public class Task {
         this.status = status;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
     public Task(String title, String description, int id) {
         this.title = title;
         this.description = description;
@@ -60,5 +68,9 @@ public class Task {
         text += description + "\n";
 
         return text;
+    }
+
+    public Task copy() {
+        return new Task(this);
     }
 }

@@ -1,14 +1,10 @@
 package task;
 
 public class Subtask extends Task {
-    private int epicId;
+    private final int epicId;
 
     public int getEpicId() {
         return epicId;
-    }
-
-    public void setEpicId(Integer epicId) {
-        this.epicId = epicId;
     }
 
     public Subtask(String title, String description, int id, Status status, int epicId) {
@@ -27,5 +23,9 @@ public class Subtask extends Task {
         text += description + "\n";
         text += "Принадлежит эпику с id = " + epicId + "\n";
         return text;
+    }
+    @Override
+    public Task copy() {
+        return new Subtask(this);
     }
 }

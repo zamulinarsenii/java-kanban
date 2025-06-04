@@ -1,15 +1,16 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Epic extends Task {
-    private ArrayList<Integer> subtasksId = new ArrayList<>();
+    private List<Integer> subtasksId = new ArrayList<>();
 
-    public ArrayList<Integer> getSubtasksId() {
+    public List<Integer> getSubtasksId() {
         return subtasksId;
     }
 
-    public void setSubtasksId(ArrayList<Integer> subtasksId) {
+    public void setSubtasksId(List<Integer> subtasksId) {
         this.subtasksId = subtasksId;
     }
 
@@ -26,5 +27,9 @@ public class Epic extends Task {
         text += description + "\n";
         text += "Содержит подзадачи с id = " + subtasksId + "\n";
         return text;
+    }
+    @Override
+    public Task copy() {
+        return new Epic(this);
     }
 }
