@@ -1,6 +1,7 @@
 package task;
 
 import manager.InMemoryTaskManager;
+import manager.Managers;
 import manager.TaskManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ class EpicSubtaskValidationTest {
 
     @BeforeEach
     void setUp() {
-        taskManager = new InMemoryTaskManager();
+        taskManager = Managers.getDefault();
         epic = new Epic("Epic", "Description", 1);
         taskManager.addEpic(epic);
     }
