@@ -1,6 +1,5 @@
 package manager;
 
-import manager.TaskManager;
 import task.Epic;
 import task.Status;
 import task.Subtask;
@@ -164,6 +163,7 @@ public class InMemoryTaskManager implements TaskManager {
             updateEpicStatus(newSubtask);
         }
     }
+
     @Override
     public List<Task> getHistory() {
         return historyManager.getHistory();

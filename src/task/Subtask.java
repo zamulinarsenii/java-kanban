@@ -24,6 +24,7 @@ public class Subtask extends Task {
         text += "Принадлежит эпику с id = " + epicId + "\n";
         return text;
     }
+
     @Override
     public Task copy() {
         return new Subtask(this);
