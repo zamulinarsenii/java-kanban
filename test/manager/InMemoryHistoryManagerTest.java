@@ -6,7 +6,7 @@ import task.Task;
 import java.util.List;
 
 class InMemoryHistoryManagerTest {
-    private final InMemoryHistoryManager history = new InMemoryHistoryManager();
+    private final HistoryManager history = Managers.getDefaultHistory();
 
     @Test
     void shouldAddTasksToHistory() {
