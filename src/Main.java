@@ -1,4 +1,3 @@
-import manager.InMemoryTaskManager;
 import manager.Managers;
 import manager.TaskManager;
 import task.Epic;
@@ -121,6 +120,7 @@ public class Main {
     public static void deleteById(TaskManager inMemoryTaskManager) {
         inMemoryTaskManager.deleteById(2);
     }
+
     private static void printAllTasks(TaskManager manager) {
         System.out.println("Задачи:");
         for (Task task : manager.getAllTasks()) {
