@@ -1,3 +1,4 @@
+import manager.FileBackedTaskManager;
 import manager.Managers;
 import manager.TaskManager;
 import task.Epic;
@@ -5,21 +6,25 @@ import task.Status;
 import task.Subtask;
 import task.Task;
 
+import java.io.File;
+
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager inMemoryTaskManager = Managers.getDefault();
-        addTask(inMemoryTaskManager);
-        addEpic(inMemoryTaskManager);
-        addSubtask(inMemoryTaskManager);
-        printAllTasks(inMemoryTaskManager);
-        getById(inMemoryTaskManager);
-        updateTask(inMemoryTaskManager);
-        printAllTasks(inMemoryTaskManager);
-        deleteById(inMemoryTaskManager);
-        printAllTasks(inMemoryTaskManager);
-        deleteAllTasks(inMemoryTaskManager);
-        printAllTasks(inMemoryTaskManager);
+        File file = new File("tasks.txt");
+        TaskManager inFileTaskManager = Managers.getDefaultFile(file);
+        FileBackedTaskManager.loadFromFile(file);
+        addTask(inFileTaskManager);
+        addEpic(inFileTaskManager);
+        addSubtask(inFileTaskManager);
+        printAllTasks(inFileTaskManager);
+        getById(inFileTaskManager);
+        updateTask(inFileTaskManager);
+        printAllTasks(inFileTaskManager);
+        deleteById(inFileTaskManager);
+        printAllTasks(inFileTaskManager);
+        //deleteAllTasks(inFileTaskManager);
+        printAllTasks(inFileTaskManager);
     }
 
     public static void addTask(TaskManager inMemoryTaskManager) {
