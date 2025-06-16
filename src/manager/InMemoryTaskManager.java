@@ -49,7 +49,7 @@ public class InMemoryTaskManager implements TaskManager {
         updateEpicStatus(copy);
     }
 
-    private void updateEpicStatus(Subtask subtask) {
+    protected void updateEpicStatus(Subtask subtask) {
         List<Status> statuses = new ArrayList<>();
         for (Integer subtaskId : epics.get(subtask.getEpicId()).getSubtasksId()) {
             statuses.add(subtasks.get(subtaskId).getStatus());

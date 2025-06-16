@@ -1,12 +1,19 @@
 package task;
 
+import manager.TaskType;
+
 import java.util.Objects;
 
 public class Task {
-    protected String title;
+    protected String name;
     protected String description;
     protected int id;
     protected Status status;
+    protected TaskType type;
+
+    public TaskType getType() {
+        return type;
+    }
 
     public int getId() {
         return id;
@@ -24,30 +31,35 @@ public class Task {
         this.status = status;
     }
 
-    public Task(String title, String description, int id, Status status) {
-        this.title = title;
+    public Task(String name, String description, int id, Status status) {
+        this.name = name;
         this.description = description;
         this.id = id;
         this.status = status;
+        this.type = TaskType.TASK;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public Task(String title, String description, int id) {
-        this.title = title;
+        this.name = title;
         this.description = description;
         this.id = id;
         status = Status.NEW;
     }
 
     public Task(Task task) {
-        this(task.title, task.description, task.id, task.status);
+        this(task.name, task.description, task.id, task.status);
     }
 
     @Override
@@ -64,7 +76,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String text = title + " | Status: " + status + ", id: " + id + "\n";
+        String text = name + " | Status: " + status + ", id: " + id + "\n";
         text += description + "\n";
 
         return text;
