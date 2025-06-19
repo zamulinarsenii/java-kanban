@@ -35,7 +35,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                     case SUBTASK -> manager.addSubtask((Subtask) task);
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException exception) {
             throw new ManagerSaveException("Ошибка чтения из файла");
         }
         return manager;
@@ -53,7 +53,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             for (Task subtask : getAllSubtasks()) {
                 writer.write(toString(subtask) + "\n");
             }
-        } catch (IOException e) {
+        } catch (IOException exception) {
             throw new ManagerSaveException("Ошибка сохранения в файл");
         }
     }
@@ -65,7 +65,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 task.getName(),
                 task.getStatus(),
                 task.getDescription(),
-                task instanceof Subtask ? ((Subtask) task).getEpicId() : ""
+                task.getType() == TaskType.SUBTASK ? ((Subtask) task).getEpicId() : ""
         );
     }
 
