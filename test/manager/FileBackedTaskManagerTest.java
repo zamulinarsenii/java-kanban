@@ -10,7 +10,7 @@ import java.util.List;
 import static manager.Managers.getDefaultFile;
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileBackedTaskManagerTest {
+public class FileBackedTaskManagerTest {
 
     File tempFile;
 
