@@ -1,55 +1,50 @@
 package manager;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import task.*;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
-import task.Task;
-import java.util.List;
 
-class InMemoryHistoryManagerTest {
-    private final HistoryManager history = Managers.getDefaultHistory();
+public class InMemoryHistoryManagerTest {
+    private HistoryManager historyManager;
 
-    @Test
-    void shouldAddTasksToHistory() {
-        Task task1 = new Task("Task1", "Description1", 1);
-        Task task2 = new Task("Task2", "Description2", 2);
-
-        history.add(task1);
-        history.add(task2);
-
-        assertEquals(List.of(task1, task2), history.getHistory());
+    @BeforeEach
+    public void beforeEach() {
+        historyManager = new InMemoryHistoryManager();
     }
 
     @Test
-    void shouldRemoveDuplicatesAndKeepLastPosition() {
-        Task task = new Task("Task1", "Description1", 1);
-
-        history.add(task);
-        history.add(new Task("Task2", "Description2", 2));
-        history.add(task); // Повторное добавление
-
-        assertEquals(2, history.getHistory().size());
-        assertEquals(task, history.getHistory().get(1)); // Проверяем последнюю позицию
+    public void shouldReturnEmptyHistory() {
+        assertTrue(historyManager.getHistory().isEmpty());
     }
 
     @Test
-    void shouldRemoveTaskFromHistory() {
-        Task task = new Task("Task1", "Description1", 1);
-        history.add(task);
-
-        history.remove(1);
-
-        assertTrue(history.getHistory().isEmpty());
+    public void shouldAddAndPreventDuplicates() {
+        Task task = new Task(1, "Task", "Desc", TaskStatus.NEW, LocalDateTime.now(), Duration.ofMinutes(10));
+        historyManager.add(task);
+        historyManager.add(task);
+        assertEquals(1, historyManager.getHistory().size());
     }
 
     @Test
-    void shouldHandleNodeRemovalCorrectly() {
-        Task task1 = new Task("Task1", "Description1", 1);
-        Task task2 = new Task("Task2", "Description2", 2);
+    public void shouldRemoveFromHistory() {
+        Task task1 = new Task(1, "Task1", "Desc1", TaskStatus.NEW, LocalDateTime.now(), Duration.ofMinutes(10));
+        Task task2 = new Task(2, "Task2", "Desc2", TaskStatus.NEW, LocalDateTime.now(), Duration.ofMinutes(10));
+        Task task3 = new Task(3, "Task3", "Desc3", TaskStatus.NEW, LocalDateTime.now(), Duration.ofMinutes(10));
 
-        history.add(task1);
-        history.add(task2);
-        history.remove(1); // Удаление из середины/начала
+        historyManager.add(task1);
+        historyManager.add(task2);
+        historyManager.add(task3);
 
-        assertEquals(List.of(task2), history.getHistory());
+        historyManager.remove(1);
+        assertEquals(2, historyManager.getHistory().size());
+        historyManager.remove(3);
+        assertEquals(1, historyManager.getHistory().size());
+        historyManager.remove(2);
+        assertTrue(historyManager.getHistory().isEmpty());
     }
 }

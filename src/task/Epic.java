@@ -1,12 +1,13 @@
 package task;
 
-import manager.TaskType;
-
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Epic extends Task {
     private List<Integer> subtasksId = new ArrayList<>();
+    private LocalDateTime endTime;
 
     public List<Integer> getSubtasksId() {
         return subtasksId;
@@ -16,8 +17,8 @@ public class Epic extends Task {
         this.subtasksId = subtasksId;
     }
 
-    public Epic(String title, String description, int id) {
-        super(title, description, id);
+    public Epic(int id, String name, String description) {
+        super(id, name, description, null, null);
         this.type = TaskType.EPIC;
     }
 
@@ -27,9 +28,22 @@ public class Epic extends Task {
         this.type = TaskType.EPIC;
     }
 
-    public Epic(String title, String description, int id, Status status) {
-        super(title, description, id, status);
+    public Epic(int id, String name, String description, TaskStatus status) {
+        super(id, name, description, status, null, null);
         this.type = TaskType.EPIC;
+    }
+
+    public void addSubtaskId(int subtaskId) {
+        subtasksId.add(subtaskId);
+    }
+
+    @Override
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
     @Override
@@ -37,6 +51,12 @@ public class Epic extends Task {
         String text = name + " | Status: " + status + ", id: " + id + "\n";
         text += description + "\n";
         text += "Содержит подзадачи с id = " + subtasksId + "\n";
+        if (startTime != null)
+            text += "Начало: " + startTime.format(dateTimeFormatter) + "\n";
+        if (duration != null)
+            text += "Продолжительность: " + duration.toMinutes() + "\n";
+        if (endTime != null)
+            text += "Конец: " + endTime.format(dateTimeFormatter) + "\n";
         return text;
     }
 
