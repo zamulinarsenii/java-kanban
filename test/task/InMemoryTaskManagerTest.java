@@ -1,6 +1,5 @@
 package task;
 
-import manager.InMemoryTaskManager;
 import manager.Managers;
 import manager.TaskManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,9 +35,9 @@ class InMemoryTaskManagerTest {
         Task task = new Task("Test", "Desc", 1);
         taskManager.addTask(task);
 
-        task.setTitle("Hacked");
+        task.setName("Hacked");
         Task saved = taskManager.getById(1);
 
-        assertNotEquals("Hacked", saved.getTitle());
+        assertNotEquals("Hacked", saved.getName());
     }
 }
