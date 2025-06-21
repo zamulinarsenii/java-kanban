@@ -11,7 +11,6 @@ public class Task {
     protected String description;
     protected int id;
     protected TaskStatus status;
-    protected TaskType type;
     protected LocalDateTime startTime;
     protected Duration duration;
     protected final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm");
@@ -24,7 +23,6 @@ public class Task {
         this.status = status;
         this.startTime = startTime;
         this.duration = duration;
-        type = TaskType.TASK;
     }
 
     public Task(int id, String name, String description, LocalDateTime startTime, Duration duration) {
@@ -34,7 +32,6 @@ public class Task {
         this.startTime = startTime;
         this.duration = duration;
         status = TaskStatus.NEW;
-        type = TaskType.TASK;
     }
 
     public Task(Task task) {
@@ -42,7 +39,7 @@ public class Task {
     }
 
     public TaskType getType() {
-        return type;
+        return TaskType.TASK;
     }
 
     public LocalDateTime getEndTime() {

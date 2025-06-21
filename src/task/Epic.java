@@ -1,6 +1,5 @@
 package task;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,18 +18,20 @@ public class Epic extends Task {
 
     public Epic(int id, String name, String description) {
         super(id, name, description, null, null);
-        this.type = TaskType.EPIC;
     }
 
     public Epic(Epic epic) {
         super(epic);
         this.subtasksId = new ArrayList<>(epic.subtasksId);
-        this.type = TaskType.EPIC;
     }
 
     public Epic(int id, String name, String description, TaskStatus status) {
         super(id, name, description, status, null, null);
-        this.type = TaskType.EPIC;
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.EPIC;
     }
 
     public void addSubtaskId(int subtaskId) {
