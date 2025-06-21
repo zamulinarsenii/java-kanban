@@ -37,7 +37,7 @@ public class InMemoryTaskManager implements TaskManager {
         Epic copy = new Epic(epic);
         epics.put(copy.getId(), copy);
         // У эпика startTime может быть null, но пусть добавляется в TreeSet
-        if(copy.getStartTime() != null)
+        if (copy.getStartTime() != null)
             prioritizedTasks.add(copy);
 
     }
@@ -239,6 +239,7 @@ public class InMemoryTaskManager implements TaskManager {
     public List<Task> getPrioritizedTasks() {
         return new ArrayList<>(prioritizedTasks);
     }
+
     private boolean isOverlapping(Task task1, Task task2) {
         if (task1.getStartTime() == null || task2.getStartTime() == null) {
             return false; // если хотя бы одна из задач не имеет времени — считаем, что не пересекаются
@@ -250,6 +251,7 @@ public class InMemoryTaskManager implements TaskManager {
 
         return !(end1.isEqual(start2) || end1.isBefore(start2) || end2.isEqual(start1) || end2.isBefore(start1));
     }
+
     private boolean hasIntersections(Task newTask) {
         if (prioritizedTasks.stream()
                 .filter(existingTask -> existingTask.getId() != newTask.getId()) // не сравниваем саму себя

@@ -78,12 +78,16 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         String name = fields[2];
         TaskStatus status = TaskStatus.valueOf(fields[3]);
         String description = fields[4];
-        LocalDateTime startTime =LocalDateTime.ofEpochSecond(Long.parseLong(fields[5]), 0, ZoneOffset.UTC);
+        LocalDateTime startTime = LocalDateTime.ofEpochSecond(Long.parseLong(fields[5]), 0, ZoneOffset.UTC);
         Duration duration = Duration.ofMinutes(Long.parseLong(fields[6]));
         switch (type) {
-            case TASK -> {return new Task(id, name, description, status, startTime, duration);}
+            case TASK -> {
+                return new Task(id, name, description, status, startTime, duration);
+            }
 
-            case EPIC ->{ return new Epic(id, name, description, status);}
+            case EPIC -> {
+                return new Epic(id, name, description, status);
+            }
 
             case SUBTASK -> {
                 int epicId = Integer.parseInt(fields[7]);
