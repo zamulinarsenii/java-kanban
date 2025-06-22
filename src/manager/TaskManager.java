@@ -40,4 +40,6 @@ public interface TaskManager {
     void updateSubtask(Subtask newSubtask);
 
     List<Task> getHistory();
+
+    List<Task> getPrioritizedTasks();
 }

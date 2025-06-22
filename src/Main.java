@@ -2,11 +2,13 @@ import manager.FileBackedTaskManager;
 import manager.Managers;
 import manager.TaskManager;
 import task.Epic;
-import task.Status;
+import task.TaskStatus;
 import task.Subtask;
 import task.Task;
 
 import java.io.File;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class Main {
 
@@ -28,51 +30,61 @@ public class Main {
     }
 
     public static void addTask(TaskManager inMemoryTaskManager) {
-        String title = "Задача 1";
+        String name = "Задача 1";
         String description = "Описание задачи 1";
-        Status status = Status.NEW;
-        Task task = new Task(title, description, inMemoryTaskManager.getCounter(), status);// id = 0
+        TaskStatus status = TaskStatus.NEW;
+        LocalDateTime startTime = LocalDateTime.of(2025, 6, 1, 0, 0, 0);
+        Duration duration = Duration.ofMinutes(30);
+        Task task = new Task(inMemoryTaskManager.getCounter(), name, description, status, startTime, duration);// id = 1
         inMemoryTaskManager.addTask(task);
 
-        title = "Задача 2";
+        name = "Задача 2";
         description = "Описание задачи 2";
-        status = Status.DONE;
-        task = new Task(title, description, inMemoryTaskManager.getCounter(), status);// id = 1
+        status = TaskStatus.DONE;
+        startTime = LocalDateTime.of(2025, 6, 2, 0, 15, 0);
+        duration = Duration.ofMinutes(60);
+        task = new Task(inMemoryTaskManager.getCounter(), name, description, status, startTime, duration);// id = 2
         inMemoryTaskManager.addTask(task);
     }
 
     public static void addEpic(TaskManager inMemoryTaskManager) {
-        String title = "Эпик 1";
+        String name = "Эпик 1";
         String description = "Описание эпика 1";
-        Epic epic = new Epic(title, description, inMemoryTaskManager.getCounter());// id = 2
+        Epic epic = new Epic(inMemoryTaskManager.getCounter(), name, description);// id = 3
         inMemoryTaskManager.addEpic(epic);
 
-        title = "Эпик 2";
+        name = "Эпик 2";
         description = "Описание эпика 2";
-        epic = new Epic(title, description, inMemoryTaskManager.getCounter());// id = 3
+        epic = new Epic(inMemoryTaskManager.getCounter(), name, description);// id = 4
         inMemoryTaskManager.addEpic(epic);
     }
 
     public static void addSubtask(TaskManager inMemoryTaskManager) {
-        String title = "Подзадача 1";
+        String name = "Подзадача 1";
         String description = "Описание подзадачи 1";
-        Status status = Status.NEW;
-        int epicId = 2;
-        Subtask subtask = new Subtask(title, description, inMemoryTaskManager.getCounter(), status, epicId);// id = 4
+        TaskStatus status = TaskStatus.NEW;
+        int epicId = 3;
+        LocalDateTime startTime = LocalDateTime.of(2025, 6, 3, 12, 0, 0);
+        Duration duration = Duration.ofMinutes(30);
+        Subtask subtask = new Subtask(inMemoryTaskManager.getCounter(), name, description, status, startTime, duration, epicId);// id = 5
         inMemoryTaskManager.addSubtask(subtask);
 
-        title = "Подзадача 2";
+        name = "Подзадача 2";
         description = "Описание подзадачи 2";
-        status = Status.DONE;
-        epicId = 2;
-        subtask = new Subtask(title, description, inMemoryTaskManager.getCounter(), status, epicId);// id = 5
+        status = TaskStatus.DONE;
+        epicId = 3;
+        startTime = LocalDateTime.of(2025, 6, 4, 13, 0, 0);
+        duration = Duration.ofMinutes(60);
+        subtask = new Subtask(inMemoryTaskManager.getCounter(), name, description, status, startTime, duration, epicId);// id = 6
         inMemoryTaskManager.addSubtask(subtask);
 
-        title = "Подзадача 3";
+        name = "Подзадача 3";
         description = "Описание подзадачи 3";
-        status = Status.DONE;
-        epicId = 3;
-        subtask = new Subtask(title, description, inMemoryTaskManager.getCounter(), status, epicId);// id = 6
+        status = TaskStatus.DONE;
+        epicId = 4;
+        startTime = LocalDateTime.of(2025, 6, 5, 13, 30, 0);
+        duration = Duration.ofMinutes(30);
+        subtask = new Subtask(inMemoryTaskManager.getCounter(), name, description, status, startTime, duration, epicId);// id = 7
         inMemoryTaskManager.addSubtask(subtask);
     }
 
@@ -100,25 +112,29 @@ public class Main {
     }
 
     public static void updateTask(TaskManager inMemoryTaskManager) {
-        String title = "Обновленная Задача 1";
+        String name = "Обновленная Задача 1";
         String description = "Обновленное Описание задачи 1";
         int id = 0;
-        Status status = Status.DONE;
-        Task task = new Task(title, description, id, status);// id = 0
+        TaskStatus status = TaskStatus.DONE;
+        LocalDateTime startTime = LocalDateTime.of(2025, 6, 2, 0, 0, 0);
+        Duration duration = Duration.ofMinutes(15);
+        Task task = new Task(id, name, description, status, startTime, duration);// id = 0
         inMemoryTaskManager.updateTask(task);
 
-        title = "Обновленный Эпик 2";
+        name = "Обновленный Эпик 2";
         description = "Обновленное Описание эпика 2";
         id = 3;
-        Epic epic = new Epic(title, description, id);// id = 3
+        Epic epic = new Epic(id, name, description);// id = 3
         inMemoryTaskManager.updateEpic(epic);
 
-        title = "Обновленная Подзадача 1";
+        name = "Обновленная Подзадача 1";
         description = "Обновленное Описание подзадачи 1";
-        status = Status.DONE;
-        int epicId = 2;
+        status = TaskStatus.DONE;
+        int epicId = 3;
         id = 4;
-        Subtask subtask = new Subtask(title, description, id, status, epicId);// id = 4
+        startTime = LocalDateTime.of(2025, 6, 2, 12, 0, 0);
+        duration = Duration.ofMinutes(90);
+        Subtask subtask = new Subtask(id, name, description, status, startTime, duration, epicId);// id = 4
         inMemoryTaskManager.updateSubtask(subtask);
     }
 
