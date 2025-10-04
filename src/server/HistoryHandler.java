@@ -5,10 +5,8 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import manager.TaskManager;
 import task.Task;
-import task.TaskType;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 
 public class HistoryHandler extends BaseHttpHandler implements HttpHandler {

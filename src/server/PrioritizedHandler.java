@@ -7,7 +7,6 @@ import manager.TaskManager;
 import task.Task;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 
 public class PrioritizedHandler extends BaseHttpHandler implements HttpHandler {
@@ -28,6 +27,7 @@ public class PrioritizedHandler extends BaseHttpHandler implements HttpHandler {
                 sendUncorrect(httpExchange, "Некорректный метод!");
         }
     }
+
     private void handleGetRequest(HttpExchange httpExchange) throws IOException {
         String[] pathParts = getPathParts(httpExchange);
         if (pathParts.length > 2) {
