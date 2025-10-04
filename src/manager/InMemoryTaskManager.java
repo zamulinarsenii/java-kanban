@@ -28,6 +28,7 @@ public class InMemoryTaskManager implements TaskManager {
         Task copy = new Task(task);
 
         hasIntersections(copy);
+
         tasks.put(copy.getId(), copy);
         prioritizedTasks.add(copy);
     }
