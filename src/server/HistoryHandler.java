@@ -27,6 +27,7 @@ public class HistoryHandler extends BaseHttpHandler implements HttpHandler {
                 sendUncorrect(httpExchange, "Некорректный метод!");
         }
     }
+
     private void handleGetRequest(HttpExchange httpExchange) throws IOException {
         String[] pathParts = getPathParts(httpExchange);
         if (pathParts.length > 2) {

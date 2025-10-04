@@ -19,6 +19,14 @@ public class HttpTaskServer {
         initializeHandlers();
     }
 
+    // Для совместимости с существующим main методом
+    public static void main(String[] args) throws IOException {
+        File file = new File("tasks.txt");
+        TaskManager inFileTaskManager = Managers.getDefaultFile(file);
+        HttpTaskServer server = new HttpTaskServer(inFileTaskManager);
+        server.start();
+    }
+
     private void initializeHandlers() {
         httpServer.createContext("/tasks", new TaskHandler(taskManager));
         httpServer.createContext("/subtasks", new SubtaskHandler(taskManager));
@@ -39,13 +47,5 @@ public class HttpTaskServer {
 
     public TaskManager getTaskManager() {
         return taskManager;
-    }
-
-    // Для совместимости с существующим main методом
-    public static void main(String[] args) throws IOException {
-        File file = new File("tasks.txt");
-        TaskManager inFileTaskManager = Managers.getDefaultFile(file);
-        HttpTaskServer server = new HttpTaskServer(inFileTaskManager);
-        server.start();
     }
 }
