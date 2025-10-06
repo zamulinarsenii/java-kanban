@@ -19,12 +19,19 @@ public class HistoryHandler extends BaseHttpHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         String method = httpExchange.getRequestMethod();
-        switch (method) {
-            case "GET":
+        HttpMethod httpMethod = HttpMethod.fromString(method);
+
+        if (httpMethod == null) {
+            sendUncorrect(httpExchange, "Некорректный метод!");
+            return;
+        }
+        switch (httpMethod) {
+
+            case GET:
                 handleGetRequest(httpExchange);
                 break;
             default:
-                sendUncorrect(httpExchange, "Некорректный метод!");
+                sendUncorrect(httpExchange, "Метод не поддерживается!");
         }
     }
 
