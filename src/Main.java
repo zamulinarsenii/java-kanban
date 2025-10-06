@@ -1,4 +1,3 @@
-import manager.FileBackedTaskManager;
 import manager.Managers;
 import manager.TaskManager;
 import task.Epic;
@@ -15,7 +14,6 @@ public class Main {
     public static void main(String[] args) {
         File file = new File("tasks.txt");
         TaskManager inFileTaskManager = Managers.getDefaultFile(file);
-        FileBackedTaskManager.loadFromFile(file);
         addTask(inFileTaskManager);
         addEpic(inFileTaskManager);
         addSubtask(inFileTaskManager);

@@ -34,10 +34,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                     case EPIC -> manager.addEpic((Epic) task);
                     case SUBTASK -> manager.addSubtask((Subtask) task);
                 }
+                manager.getCounter();
             }
         } catch (IOException exception) {
             throw new ManagerSaveException("Ошибка чтения из файла");
         }
+
         return manager;
     }
 
